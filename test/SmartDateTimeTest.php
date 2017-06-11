@@ -83,11 +83,75 @@ class SmartDateTimeTest // extends PHPUnit_Framework_TestCase
         for ($i = 1; $i <= 60; $i++) {
             $date = new SmartDateTime('2015-01-31');
             echo(__FILE__ . ' ' . __LINE__ . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$date->format('Y-m-d')}");
-            $date->add2(new DateInterval("P{$i}M"));
+            $date->add(new DateInterval("P{$i}M"));
             echo("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$date->format('Y-m-d')}<br />");
         }
     }
 
+    public function testSmartDateTimeForMonthAdd30th()
+    {
+        for ($i = 1; $i <= 60; $i++) {
+            $date = new SmartDateTime('2015-11-30');
+            echo(__FILE__ . ' ' . __LINE__ . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$date->format('Y-m-d')}");
+            $date->add(new DateInterval("P{$i}M"));
+            echo("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$date->format('Y-m-d')}<br />");
+        }
+    }
+
+    public function testSmartDateTimeForMonthAdd29th()
+    {
+        for ($i = 1; $i <= 60; $i++) {
+            $date = new SmartDateTime('2016-02-29');
+            echo(__FILE__ . ' ' . __LINE__ . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$date->format('Y-m-d')}");
+            $date->add(new DateInterval("P{$i}M"));
+            echo("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$date->format('Y-m-d')}<br />");
+        }
+    }
+
+    public function testSubtractingDateByMonths15th()
+    {
+        /* this is a proof of concept... that if we set the day to 15th, add 12-36 months
+            we should always land on the 15th. */
+        for ($i = 1; $i <= 60; $i++) {
+            $date = new DateTime('2015-05-15');
+            echo(__FILE__ . ' ' . __LINE__ . " {$date->format('Y-m-d')} ");
+            $date->modify("-{$i} month");
+            echo(" {$date->format('Y-m-d')}<br />");
+        }
+    }
+
+    public function testSmartDateTimeForMonthSub31st()
+    {
+        for ($i = 1; $i <= 60; $i++) {
+            $date = new SmartDateTime('2015-01-31');
+            echo(__FILE__ . ' ' . __LINE__ . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$i}");
+            echo("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$date->format('Y-m-d')}");
+            $date->sub(new DateInterval("P{$i}M"));
+            echo("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$date->format('Y-m-d')}<br />");
+        }
+    }
+
+    public function testSmartDateTimeForMonthSub30th()
+    {
+        for ($i = 1; $i <= 60; $i++) {
+            $date = new SmartDateTime('2015-11-30');
+            echo(__FILE__ . ' ' . __LINE__ . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$i}");
+            echo("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$date->format('Y-m-d')}");
+            $date->sub(new DateInterval("P{$i}M"));
+            echo("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$date->format('Y-m-d')}<br />");
+        }
+    }
+
+    public function testSmartDateTimeForMonthSub29th()
+    {
+        for ($i = 1; $i <= 60; $i++) {
+            $date = new SmartDateTime('2016-02-29');
+            echo(__FILE__ . ' ' . __LINE__ . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$i}");
+            echo("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$date->format('Y-m-d')}");
+            $date->sub(new DateInterval("P{$i}M"));
+            echo("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$date->format('Y-m-d')}<br />");
+        }
+    }
 //    public function testDateTimeIntervalYearSub()
 //    {
 //        $dt = new SmartDateTime('2016-02-28');
@@ -110,7 +174,19 @@ class SmartDateTimeTest // extends PHPUnit_Framework_TestCase
 
 $test = new SmartDateTimeTest();
 echo '<hr />';
+$test->testSmartDateTimeForMonthSub31st();
+echo '<hr />';
+$test->testSmartDateTimeForMonthSub30th();
+echo '<hr />';
+$test->testSmartDateTimeForMonthSub29th();
+//echo '<hr />';
+//$test->testSubtractingDateByMonths15th();
+echo '<hr />';
 $test->testSmartDateTimeForMonthAdd31st();
+echo '<hr />';
+$test->testSmartDateTimeForMonthAdd30th();
+echo '<hr />';
+$test->testSmartDateTimeForMonthAdd29th();
 //echo '<hr />';
 //$test->testAdvancingDateByMonths15th();
 //echo '<hr />';

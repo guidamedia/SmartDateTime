@@ -38,12 +38,8 @@ class SmartDateTime extends DateTime
      */
     public function sub(DateInterval $interval)
     {
-        try {
-            $output = $this;
-        } catch (Exception $e) {
-            $output = false;
-        }
-        return $output;
+        $this->modifyDateSmartly($interval, '-');
+        return $this;
     }
 
     /**
@@ -52,23 +48,9 @@ class SmartDateTime extends DateTime
      * @return DateTime
      * @link http://php.net/manual/en/datetime.add.php
      */
-    public function add2(DateInterval $interval)
+    public function add(DateInterval $interval)
     {
-        if (0 < $interval->m && $this->isItTheLastDayOfTheMonth()) {
-            $this->setDate(
-                $this->format('Y'),
-                $this->format('m'),
-                15
-            );
-            parent::add($interval);
-            $this->setDate(
-                $this->format('Y'),
-                $this->format('m'),
-                date('t', $this->getTimestamp())
-            );
-        } else {
-            parent::add($interval);
-        }
+        $this->modifyDateSmartly($interval, '+');
         return $this;
     }
 
@@ -102,5 +84,37 @@ class SmartDateTime extends DateTime
             );
         }
         return $output;
+    }
+
+    /**
+     * @param DateInterval $interval
+     * @param $operator
+     */
+    private function modifyDateSmartly(DateInterval $interval, $operator)
+    {
+        if (0 < $interval->m && $this->isItTheLastDayOfTheMonth()) {
+            $orig_day = $this->format('d');
+            $this->setDate(
+                $this->format('Y'),
+                $this->format('m'),
+                15
+            );
+            parent::modify("{$operator}{$interval->m} month");
+            $last_day = date('t', $this->getTimestamp());
+            if ($last_day > $orig_day) {
+                $new_day = $orig_day;
+            } else {
+                $new_day = $last_day;
+            }
+            $this->setDate(
+                $this->format('Y'),
+                $this->format('m'),
+                $new_day
+            );
+        } elseif ('+' == $operator) {
+            parent::add($interval);
+        } else {
+            parent::sub($interval);
+        }
     }
 }
