@@ -18,7 +18,8 @@ class SmartDateTimeTest // extends PHPUnit_Framework_TestCase
             we should always land on the 15th. */
         for ($i = 1; $i <= 60; $i++) {
             $date = new DateTime('2015-05-15');
-            echo(__FILE__ . ' ' . __LINE__ . " {$date->format('Y-m-d')} ");
+            echo(__FILE__ . ' ' . __LINE__ . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$i}");
+            echo("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$date->format('Y-m-d')}");
             $date->add(new DateInterval("P{$i}M"));
             echo(" {$date->format('Y-m-d')}<br />");
         }
@@ -30,7 +31,8 @@ class SmartDateTimeTest // extends PHPUnit_Framework_TestCase
             we should always land on the 15th. */
         for ($i = 1; $i <= 60; $i++) {
             $date = new DateTime('2015-01-31');
-            echo(__FILE__ . ' ' . __LINE__ . " {$date->format('Y-m-d')} ");
+            echo(__FILE__ . ' ' . __LINE__ . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$i}");
+            echo("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$date->format('Y-m-d')}");
             $date->add(new DateInterval("P{$i}M"));
             echo(" {$date->format('Y-m-d')}<br />");
         }
@@ -42,7 +44,8 @@ class SmartDateTimeTest // extends PHPUnit_Framework_TestCase
             we should always land on the 15th. */
         for ($i = 1; $i <= 60; $i++) {
             $date = new DateTime('2015-06-30');
-            echo(__FILE__ . ' ' . __LINE__ . " {$date->format('Y-m-d')} ");
+            echo(__FILE__ . ' ' . __LINE__ . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$i}");
+            echo("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$date->format('Y-m-d')}");
             $date->add(new DateInterval("P{$i}M"));
             echo(" {$date->format('Y-m-d')}<br />");
         }
@@ -54,7 +57,8 @@ class SmartDateTimeTest // extends PHPUnit_Framework_TestCase
             we should always land on the 15th. */
         for ($i = 1; $i <= 60; $i++) {
             $date = new DateTime('2016-02-29');
-            echo(__FILE__ . ' ' . __LINE__ . " {$date->format('Y-m-d')} ");
+            echo(__FILE__ . ' ' . __LINE__ . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$i}");
+            echo("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$date->format('Y-m-d')}");
             $date->add(new DateInterval("P{$i}M"));
             echo(" {$date->format('Y-m-d')}<br />");
         }
@@ -66,7 +70,8 @@ class SmartDateTimeTest // extends PHPUnit_Framework_TestCase
             we should always land on the 15th. */
         for ($i = 1; $i <= 60; $i++) {
             $date = new DateTime('2015-02-28');
-            echo(__FILE__ . ' ' . __LINE__ . " {$date->format('Y-m-d')} ");
+            echo(__FILE__ . ' ' . __LINE__ . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$i}");
+            echo("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$date->format('Y-m-d')}");
             $date->add(new DateInterval("P{$i}M"));
             echo(" {$date->format('Y-m-d')}<br />");
         }
@@ -82,7 +87,8 @@ class SmartDateTimeTest // extends PHPUnit_Framework_TestCase
     {
         for ($i = 1; $i <= 60; $i++) {
             $date = new SmartDateTime('2015-01-31');
-            echo(__FILE__ . ' ' . __LINE__ . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$date->format('Y-m-d')}");
+            echo(__FILE__ . ' ' . __LINE__ . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$i}");
+            echo("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$date->format('Y-m-d')}");
             $date->add(new DateInterval("P{$i}M"));
             echo("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$date->format('Y-m-d')}<br />");
         }
@@ -92,7 +98,8 @@ class SmartDateTimeTest // extends PHPUnit_Framework_TestCase
     {
         for ($i = 1; $i <= 60; $i++) {
             $date = new SmartDateTime('2015-11-30');
-            echo(__FILE__ . ' ' . __LINE__ . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$date->format('Y-m-d')}");
+            echo(__FILE__ . ' ' . __LINE__ . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$i}");
+            echo("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$date->format('Y-m-d')}");
             $date->add(new DateInterval("P{$i}M"));
             echo("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$date->format('Y-m-d')}<br />");
         }
@@ -102,7 +109,8 @@ class SmartDateTimeTest // extends PHPUnit_Framework_TestCase
     {
         for ($i = 1; $i <= 60; $i++) {
             $date = new SmartDateTime('2016-02-29');
-            echo(__FILE__ . ' ' . __LINE__ . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$date->format('Y-m-d')}");
+            echo(__FILE__ . ' ' . __LINE__ . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$i}");
+            echo("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$date->format('Y-m-d')}");
             $date->add(new DateInterval("P{$i}M"));
             echo("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$date->format('Y-m-d')}<br />");
         }
@@ -114,7 +122,8 @@ class SmartDateTimeTest // extends PHPUnit_Framework_TestCase
             we should always land on the 15th. */
         for ($i = 1; $i <= 60; $i++) {
             $date = new DateTime('2015-05-15');
-            echo(__FILE__ . ' ' . __LINE__ . " {$date->format('Y-m-d')} ");
+            echo(__FILE__ . ' ' . __LINE__ . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$i}");
+            echo("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$date->format('Y-m-d')}");
             $date->modify("-{$i} month");
             echo(" {$date->format('Y-m-d')}<br />");
         }
@@ -152,50 +161,87 @@ class SmartDateTimeTest // extends PHPUnit_Framework_TestCase
             echo("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$date->format('Y-m-d')}<br />");
         }
     }
-//    public function testDateTimeIntervalYearSub()
-//    {
-//        $dt = new SmartDateTime('2016-02-28');
-//        $interval = new DateInterval('P2Y');
-//        $dt->sub($interval);
-//
-//        $dt = new SmartDateTime('2016-02-29');
-//        $interval = new DateInterval('P4Y');
-//        $dt->sub($interval);
-//
-//        $dt = new SmartDateTime('2016-02-29');
-//        $interval = new DateInterval('P2Y');
-//        $dt->sub($interval);
-//
-//        $dt = new SmartDateTime('2016-05-31');
-//        $interval = new DateInterval('P1Y');
-//        $dt->sub($interval);
-//    }
+
+    public function testComplicatedIntervals()
+    {
+        $date = new DateTime('2015-01-01 00:00:00');
+        echo(__FILE__ . ' ' . __LINE__ . ' $date:<pre>' . print_r($date, true) . '</pre>' . PHP_EOL);
+
+        $interval = new DateInterval('P1Y');
+        echo(__FILE__ . ' ' . __LINE__ . ' $interval:<pre>' . print_r($interval, true) . '</pre>' . PHP_EOL);
+        $date->add($interval);
+        echo(__FILE__ . ' ' . __LINE__ . ' $date:<pre>' . print_r($date, true) . '</pre>' . PHP_EOL);
+
+        $date = new DateTime('2015-01-01 00:00:00');
+        $interval->m = 5;
+        echo(__FILE__ . ' ' . __LINE__ . ' $interval:<pre>' . print_r($interval, true) . '</pre>' . PHP_EOL);
+        $date->add($interval);
+        echo(__FILE__ . ' ' . __LINE__ . ' $date:<pre>' . print_r($date, true) . '</pre>' . PHP_EOL);
+
+        $date = new DateTime('2015-01-01 00:00:00');
+        $interval->d = 14;
+        echo(__FILE__ . ' ' . __LINE__ . ' $interval:<pre>' . print_r($interval, true) . '</pre>' . PHP_EOL);
+        $date->add($interval);
+        echo(__FILE__ . ' ' . __LINE__ . ' $date:<pre>' . print_r($date, true) . '</pre>' . PHP_EOL);
+
+        $date = new DateTime('2015-01-01 00:00:00');
+        $interval->h = 12;
+        echo(__FILE__ . ' ' . __LINE__ . ' $interval:<pre>' . print_r($interval, true) . '</pre>' . PHP_EOL);
+        $date->add($interval);
+        echo(__FILE__ . ' ' . __LINE__ . ' $date:<pre>' . print_r($date, true) . '</pre>' . PHP_EOL);
+
+        $date = new DateTime('2015-01-01 00:00:00');
+        $interval->i = 30;
+        echo(__FILE__ . ' ' . __LINE__ . ' $interval:<pre>' . print_r($interval, true) . '</pre>' . PHP_EOL);
+        $date->add($interval);
+        echo(__FILE__ . ' ' . __LINE__ . ' $date:<pre>' . print_r($date, true) . '</pre>' . PHP_EOL);
+
+        $date = new DateTime('2015-01-01 00:00:00');
+        $interval->s = 30;
+        echo(__FILE__ . ' ' . __LINE__ . ' $interval:<pre>' . print_r($interval, true) . '</pre>' . PHP_EOL);
+        $date->add($interval);
+        echo(__FILE__ . ' ' . __LINE__ . ' $date:<pre>' . print_r($date, true) . '</pre>' . PHP_EOL);
+    }
+
+    public function testProofOfConceptForModify()
+    {
+        $date = new DateTime('2015-01-01 00:00:00');
+        echo(__FILE__ . ' ' . __LINE__ . ' $date:<pre>' . print_r($date, true) . '</pre>' . PHP_EOL);
+        $date->modify('+1 year +1 month +1 day +1 hour +1 minute +1 second');
+        echo(__FILE__ . ' ' . __LINE__ . ' $date:<pre>' . print_r($date, true) . '</pre>' . PHP_EOL);
+        $date->modify('-1 year -1 month -1 day -1 hour -1 minute -1 second');
+        echo(__FILE__ . ' ' . __LINE__ . ' $date:<pre>' . print_r($date, true) . '</pre>' . PHP_EOL);
+    }
 }
 
 $test = new SmartDateTimeTest();
+echo '<hr />';
+$test->testProofOfConceptForModify();
+echo '<hr />';
+$test->testComplicatedIntervals();
 echo '<hr />';
 $test->testSmartDateTimeForMonthSub31st();
 echo '<hr />';
 $test->testSmartDateTimeForMonthSub30th();
 echo '<hr />';
 $test->testSmartDateTimeForMonthSub29th();
-//echo '<hr />';
-//$test->testSubtractingDateByMonths15th();
+echo '<hr />';
+$test->testSubtractingDateByMonths15th();
 echo '<hr />';
 $test->testSmartDateTimeForMonthAdd31st();
 echo '<hr />';
 $test->testSmartDateTimeForMonthAdd30th();
 echo '<hr />';
 $test->testSmartDateTimeForMonthAdd29th();
-//echo '<hr />';
-//$test->testAdvancingDateByMonths15th();
-//echo '<hr />';
-//$test->testAdvancingDateByMonths31st();
-//echo '<hr />';
-//$test->testAdvancingDateByMonths30th();
-//echo '<hr />';
-//$test->testAdvancingDateByMonths29th();
-//echo '<hr />';
-//$test->testAdvancingDateByMonths28th();
-//echo '<hr />';
-//$test->testDateInterval();
+echo '<hr />';
+$test->testAdvancingDateByMonths15th();
+echo '<hr />';
+$test->testAdvancingDateByMonths31st();
+echo '<hr />';
+$test->testAdvancingDateByMonths30th();
+echo '<hr />';
+$test->testAdvancingDateByMonths29th();
+echo '<hr />';
+$test->testAdvancingDateByMonths28th();
+echo '<hr />';
+$test->testDateInterval();

@@ -92,7 +92,17 @@ class SmartDateTime extends DateTime
      */
     private function modifyDateSmartly(DateInterval $interval, $operator)
     {
+        /*
+         * analyze the interval. it could have y, m, d, h, i, s
+         * it maybe slower, but we would have to rotate through the values and add/subtract from
+         *      the date one at a time, or we could build a modify string
+         */
         if (0 < $interval->m && $this->isItTheLastDayOfTheMonth()) {
+            /* modify the year */
+            if (0 < $interval->y) {
+                parent::modify("{$operator}{$interval->y} year");
+            }
+            /* modify the month */
             $orig_day = $this->format('d');
             $this->setDate(
                 $this->format('Y'),
@@ -111,10 +121,52 @@ class SmartDateTime extends DateTime
                 $this->format('m'),
                 $new_day
             );
-        } elseif ('+' == $operator) {
-            parent::add($interval);
+            /* modify the remaining datetime intervals */
+            if (0 < $interval->d || 0 < $interval->h || 0 < $interval->i || 0 < $interval->s) {
+                /* since we have already advanced year and month, we do not want them a part of the modify string */
+                $interval->y = 0;
+                $interval->m = 0;
+                $modString = $this->getModifyString($interval, $operator);
+                parent::modify($modString);
+            }
+
         } else {
-            parent::sub($interval);
+            if ('+' == $operator) {
+                parent::add($interval);
+            } else {
+                $modString = $this->getModifyString($interval, '-');
+                parent::modify($modString);
+            }
         }
+    }
+
+    /**
+     * @param DateInterval $interval
+     * @param string $operator
+     * @return mixed
+     */
+    private function getModifyString(DateInterval $interval, $operator)
+    {
+        $mod_parts = array();
+        if (0 < $interval->y) {
+            $mod_parts[] = "{$operator}{$interval->y}";
+        }
+        if (0 < $interval->m) {
+            $mod_parts[] = "{$operator}{$interval->m}";
+        }
+        if (0 < $interval->d) {
+            $mod_parts[] = "{$operator}{$interval->d}";
+        }
+        if (0 < $interval->h) {
+            $mod_parts[] = "{$operator}{$interval->h}";
+        }
+        if (0 < $interval->i) {
+            $mod_parts[] = "{$operator}{$interval->i}";
+        }
+        if (0 < $interval->s) {
+            $mod_parts[] = "{$operator}{$interval->s}";
+        }
+        $output = implode(' ', $mod_parts);
+        return $output;
     }
 }
