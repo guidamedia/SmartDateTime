@@ -5,7 +5,6 @@ namespace RobGuida\SmartDateTime;
 use DateInterval;
 use DateTime;
 use DateTimeZone;
-use Exception;
 
 /**
  * Class SmartDateTime
@@ -18,9 +17,13 @@ use Exception;
  */
 class SmartDateTime extends DateTime
 {
+    /** @var boolean */
+    private $use_last_day;
+
     /**
      * @param string $date
      * @param DateTimeZone $zone
+     * @todo get TimeZone and set it when $zone = null
      */
     public function __construct($date, DateTimeZone $zone = null)
     {
@@ -28,6 +31,34 @@ class SmartDateTime extends DateTime
             $zone = new DateTimeZone('America/New_York');
         }
         parent::__construct($date, $zone);
+        $this->useOriginalDay();
+    }
+
+
+    /**
+     * Using the last day of the month in cases where the original date is < what the last day
+     *  of the month would be for the resulting month
+     */
+    public function useLastDay()
+    {
+        $this->use_last_day = true;
+    }
+
+    /**
+     * Using the original day of the month when the final day of the month > the original day
+     *  of the month would be for the resulting month
+     */
+    public function useOriginalDay()
+    {
+        $this->use_last_day = false;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isLastDay()
+    {
+        return $this->use_last_day;
     }
 
     /**
@@ -76,11 +107,12 @@ class SmartDateTime extends DateTime
                         that is the longest day of Feb when it is leap year, which it must be in this case.
             the 28th has no issues when advancing
         */
-        if (29 <= $this->format('d')) {
+        if (28 <= $this->format('d')) {
             $output = (
                 (31 == $this->format('d'))
                 || (30 == $this->format('d') && in_array($this->format('m'), array(4, 6, 9, 11)))
-                || (2 == $this->format('m') && (29 == $this->format('d')))
+                || (2 == $this->format('m') &&
+                    (29 == $this->format('d') || (28 == $this->format('d') && !$this->isItLeapYear())))
             );
         }
         return $output;
@@ -111,7 +143,7 @@ class SmartDateTime extends DateTime
             );
             parent::modify("{$operator}{$interval->m} month");
             $last_day = date('t', $this->getTimestamp());
-            if ($last_day > $orig_day) {
+            if ($last_day > $orig_day && !$this->isLastDay()) {
                 $new_day = $orig_day;
             } else {
                 $new_day = $last_day;
@@ -143,7 +175,8 @@ class SmartDateTime extends DateTime
     /**
      * @param DateInterval $interval
      * @param string $operator
-     * @return mixed
+     * @return string
+     * @todo loop through the interval object properties
      */
     private function getModifyString(DateInterval $interval, $operator)
     {

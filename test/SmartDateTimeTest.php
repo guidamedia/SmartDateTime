@@ -212,9 +212,65 @@ class SmartDateTimeTest // extends PHPUnit_Framework_TestCase
         $date->modify('-1 year -1 month -1 day -1 hour -1 minute -1 second');
         echo(__FILE__ . ' ' . __LINE__ . ' $date:<pre>' . print_r($date, true) . '</pre>' . PHP_EOL);
     }
+
+    public function testSmartDateTimeForMonthSub31stLastDay()
+    {
+        for ($i = 1; $i <= 60; $i++) {
+            $date = new SmartDateTime('2015-01-31');
+            $date->useLastDay();
+            echo(__FILE__ . ' ' . __LINE__ . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$i}");
+            echo("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$date->format('Y-m-d')}");
+            $date->sub(new DateInterval("P{$i}M"));
+            echo("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$date->format('Y-m-d')}<br />");
+        }
+    }
+
+    public function testSmartDateTimeForMonthSub30thLastDay()
+    {
+        for ($i = 1; $i <= 60; $i++) {
+            $date = new SmartDateTime('2015-11-30');
+            $date->useLastDay();
+            echo(__FILE__ . ' ' . __LINE__ . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$i}");
+            echo("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$date->format('Y-m-d')}");
+            $date->sub(new DateInterval("P{$i}M"));
+            echo("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$date->format('Y-m-d')}<br />");
+        }
+    }
+
+    public function testSmartDateTimeForMonthSub29thLastDay()
+    {
+        for ($i = 1; $i <= 60; $i++) {
+            $date = new SmartDateTime('2016-02-29');
+            $date->useLastDay();
+            echo(__FILE__ . ' ' . __LINE__ . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$i}");
+            echo("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$date->format('Y-m-d')}");
+            $date->sub(new DateInterval("P{$i}M"));
+            echo("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$date->format('Y-m-d')}<br />");
+        }
+    }
+
+    public function testSmartDateTimeForMonthSub28thLastDay()
+    {
+        for ($i = 1; $i <= 60; $i++) {
+            $date = new SmartDateTime('2014-02-28');
+            $date->useLastDay();
+            echo(__FILE__ . ' ' . __LINE__ . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$i}");
+            echo("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$date->format('Y-m-d')}");
+            $date->add(new DateInterval("P{$i}M"));
+            echo("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$date->format('Y-m-d')}<br />");
+        }
+    }
 }
 
 $test = new SmartDateTimeTest();
+echo '<hr />';
+$test->testSmartDateTimeForMonthSub31stLastDay();
+echo '<hr />';
+$test->testSmartDateTimeForMonthSub30thLastDay();
+echo '<hr />';
+$test->testSmartDateTimeForMonthSub29thLastDay();
+echo '<hr />';
+$test->testSmartDateTimeForMonthSub28thLastDay();
 echo '<hr />';
 $test->testProofOfConceptForModify();
 echo '<hr />';
