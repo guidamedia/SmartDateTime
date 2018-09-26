@@ -143,10 +143,10 @@ class SmartDateTime extends DateTime
             );
             parent::modify("{$operator}{$interval->m} month");
             $last_day = date('t', $this->getTimestamp());
-            if ($last_day > $orig_day && !$this->isLastDay()) {
-                $new_day = $orig_day;
-            } else {
+            if ($last_day < $orig_day || $this->isLastDay()) {
                 $new_day = $last_day;
+            } else {
+                $new_day = $orig_day;
             }
             $this->setDate(
                 $this->format('Y'),
@@ -181,25 +181,27 @@ class SmartDateTime extends DateTime
     private function getModifyString(DateInterval $interval, $operator)
     {
         $mod_parts = array();
-        if (0 < $interval->y) {
-            $mod_parts[] = "{$operator}{$interval->y}";
-        }
-        if (0 < $interval->m) {
-            $mod_parts[] = "{$operator}{$interval->m}";
-        }
-        if (0 < $interval->d) {
-            $mod_parts[] = "{$operator}{$interval->d}";
-        }
-        if (0 < $interval->h) {
-            $mod_parts[] = "{$operator}{$interval->h}";
-        }
-        if (0 < $interval->i) {
-            $mod_parts[] = "{$operator}{$interval->i}";
-        }
-        if (0 < $interval->s) {
-            $mod_parts[] = "{$operator}{$interval->s}";
+        foreach ($interval as $key => $val) {
+            if (in_array($key, array('days', 'invert')) || 0 == $val) {
+                continue;
+            }
+            if ('y' == $key) {
+                $int = 'year';
+            } elseif ('m' == $key) {
+                $int = 'month';
+            } elseif ('d' == $key) {
+                $int = 'day';
+            } elseif ('h' == $key) {
+                $int = 'hour';
+            } elseif ('i' == $key) {
+                $int = 'minute';
+            } else {
+                $int = 'second';
+            }
+            $mod_parts[] = "{$operator}{$val} {$int}";
         }
         $output = implode(' ', $mod_parts);
+        echo(__FILE__ . ' ' . __LINE__ . ' $output:<pre>' . print_r($output, true) . '</pre>' . PHP_EOL);
         return $output;
     }
 }
